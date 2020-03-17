@@ -1,5 +1,6 @@
 package ocr.exercice.cardviewandrecyclerexercicestep3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,17 +37,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
         ContentInformation = findViewById(R.id.content_information);
         StatueName = findViewById(R.id.statue_name);
         StatueImage = findViewById(R.id.statue_image);
-
- //mise en place d'un boutton de test qui m'a permis de trouver mon erreur quant au renvoi vers la seconde activity
-        /*Button button;
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (MainActivity.this,CardViewStatuesDetails.class);
-                startActivity(intent);
-            }
-        });*/
 
         this.configureToolbar();
 
@@ -77,11 +69,33 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
     }
  //fin de la configuration du recyclerview
 
-
-    private void configureToolbar() {
+//initialisation de la toolbar et configuration du bouton share
+     private void configureToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+      }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_main_menu, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.share_button) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String body ="";
+            String subject ="";
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, body);
+            startActivity(Intent.createChooser(shareIntent,"Partagez sur"));
+            //return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+//fin de l'implementation de la toolbar et de l'implementation du bouton share
 
 
     @Override
@@ -95,8 +109,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
         intent.putExtra(CardViewStatuesDetails.DATE, item.getActualDate());
         intent.putExtra(CardViewStatuesDetails.STATUE_NAME, item.getTitleName());
         intent.putExtra(CardViewStatuesDetails.CONTENT_INFORMATION, item.getInformationsContent());
-        //intent.putExtra("imageId",R.id.statue_image);
-        //intent.p
+
+       // intent.putExtra(CardViewStatuesDetails.STATUE_IMAGE, );
+
 
         startActivity(intent);
     }
