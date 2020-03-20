@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CardViewStatuesDetails extends AppCompatActivity {
@@ -13,7 +14,7 @@ public class CardViewStatuesDetails extends AppCompatActivity {
     public static final String DATE = "DATE";
     public static final String CONTENT_INFORMATION ="CONTENT_INFORMATION";
     public static final String STATUE_NAME ="STATUE_NAME";
-    //public static final String STATUE_IMAGE = "STATUE_IMAGE";
+    public static final String STATUE_IMAGE = "STATUE_IMAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,9 @@ public class CardViewStatuesDetails extends AppCompatActivity {
         TextView statueName = findViewById(R.id.statue_name_for_detail);
         statueName.setText(getStatueName);
 
-
+        int getStatueImage = getIntent().getIntExtra(STATUE_IMAGE, 0);
+        ImageView statueImage = findViewById(R.id.statues_view_for_detail);
+        statueImage.setImageResource((getStatueImage));
 
 
     }//fin onCreate

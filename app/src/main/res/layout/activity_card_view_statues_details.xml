@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#71898C"
-    android:id="@+id/activity_cardview_detail_constraintview">
+    android:id="@+id/activity_cardview_detail_constraintview"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <include
             layout="@layout/toolbar"/>
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/statues_view_for_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:srcCompat="@drawable/degradeorangee"
-        tools:layout_editor_absoluteX="45dp" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/date_for_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="date"
-        app:layout_constraintStart_toStartOf="@+id/statues_view_for_detail"
-        app:layout_constraintTop_toBottomOf="@+id/statue_name_for_detail" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/statue_name_for_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="nom de la statue"
-        app:layout_constraintStart_toStartOf="@+id/statues_view_for_detail"
-        app:layout_constraintTop_toBottomOf="@+id/author_name_for_detail" />
 
-    <TextView
-        android:id="@+id/author_name_for_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="nom du sculpteur"
-        app:layout_constraintStart_toStartOf="@+id/statues_view_for_detail"
-        app:layout_constraintTop_toBottomOf="@+id/statues_view_for_detail" />
+            <ImageView
+                android:id="@+id/statues_view_for_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:srcCompat="@drawable/degradeorangee"
+                tools:layout_editor_absoluteX="45dp" />
 
-    <TextView
-        android:id="@+id/content_information_for_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:layout_marginTop="8dp"
-        android:background="#D1B8B8"
-        android:text="description de la statue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_for_detail" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/date_for_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="date"/>
+
+            <TextView
+                android:id="@+id/statue_name_for_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="nom de la statue" />
+
+            <TextView
+                android:id="@+id/author_name_for_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="nom du sculpteur" />
+
+            <TextView
+                android:id="@+id/content_information_for_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:background="#D1B8B8"
+                android:text="description de la statue"
+                app:layout_constraintTop_toBottomOf="@+id/date_for_detail" />
+        </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

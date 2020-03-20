@@ -84,6 +84,7 @@ public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<Recyc
                 //la methode prend en parametre un item: listerner.onItemClick(item) que l'on obtient dans le bindviewHolder
                 //popur rappel il a la valeur de l'objet cardview*** avec un iteger de position
                 //il s'agit donc de l'objet visible sur lequel on click
+
                 mOnRecyclerAdapterForCardViewStatuesListerner.onCardviewClik(currentItem);
                 //il faut maintenant dire au main, recycler view de main qu'il y a un changement
                 //il faut aussi implementer l'interface puisqu'on la signale au main

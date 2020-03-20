@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
     //du coup on doit aussi precicser qu'il y a un parametre de plus dans l'adapter
     TextView SculptorName, Date, ContentInformation ,StatueName;
     ImageView StatueImage;
+    RecyclerView mRecyclerView;
 
 
     @Override
@@ -51,11 +52,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
         cardViewStatuesList.add(new CardViewStatues(dateFormat.format(actualDate),"La Danse des fées","L'artiste britannique Robin Wight s'est spécialisé dans la réalisation de sculptures en acier inoxydables. Il s'amuse à créer des statues de fées dansantes dont la dynamique est impressionnante. Souvent accompagnées d'immenses pissenlits, l'effet de mouvement de ces statues d'acier est à couper le souffle. ","Robin Wight",R.drawable.image3));
         cardViewStatuesList.add(new CardViewStatues(dateFormat.format(actualDate),"Freedom Statue","J'ai essayé de créer une sculpture que presque n'importe qui, indépendamment de son origine , pouvait voir et percevoir immédiatement  l' idée de quelqu'un qui se battrait pour se libérer Cette sculpture traite de la lutte pour la liberté à travers le processus créatif.Bien que, pour moi , ce sentiment provenait d'une situation personnelle particulière , je savais qu'il reflétait un désir universel.  Tout le monde doit sortir d'une situation, que ce soit une lutte interne ou une circonstance défavorable , et s'en affranchir, être libre.","Zenos Frudakis",R.drawable.h));
         cardViewStatuesList.add(new CardViewStatues(dateFormat.format(actualDate),"Temple du Bouddha de Printemps","Ce Bouddha géant est la plus grande statue du monde… avec beaucoup de différence! Avec ses 128 mètres de haut, les autres statues célèbres paraissent minuscules : la Statue de la Liberté ne fait même pas la moitié de sa taille ou le Cristo Redentor qui ne dépasse même pas son pédestral. Et comme vous pouvez l’imaginer ce Bouddha n’est pas un poids plume : 1000 tonnes, pas plus, pas moins ! Pour voir ce géant de cuivre il vous suffit de vous rendre dans la province chinoise du Henan et en plus vous pourrez profiter des magnifiques sources chaudes de la région. Chine. Terminé en 2008","Inconnu",R.drawable.boudha));
+        CardViewStatues nc = new CardViewStatues(dateFormat.format(actualDate), "title","other", "bibi", R.drawable.boudha);
+        cardViewStatuesList.add(nc);
+
 //arrylist terminée
 
 
  //configuration du recyclerview
-        RecyclerView mRecyclerView = findViewById(R.id.recyclerViewId);
+        mRecyclerView = findViewById(R.id.recyclerViewId);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
 
@@ -101,16 +105,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
     @Override
     //step 11
     //implementation de l'interface du listerner
-    public void onCardviewClik(CardViewStatues item) {
+    public void onCardviewClik(CardViewStatues cardViewStatuesItems) {
+
         Toast.makeText(this, "Il ne faut pas oublier qu'il s'agit d'une nouvelle activity et " +
                 "non d'une simple classe java sinon ca ne marche pas !!! Une matinée de perdue à cause de ça !!!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, CardViewStatuesDetails.class);//attention, c'est une nouvelle activité pas une classe java !!!
-        intent.putExtra(CardViewStatuesDetails.SCULPTOR_NAME, item.getCreatorName());
-        intent.putExtra(CardViewStatuesDetails.DATE, item.getActualDate());
-        intent.putExtra(CardViewStatuesDetails.STATUE_NAME, item.getTitleName());
-        intent.putExtra(CardViewStatuesDetails.CONTENT_INFORMATION, item.getInformationsContent());
 
-       // intent.putExtra(CardViewStatuesDetails.STATUE_IMAGE, );
+        intent.putExtra(CardViewStatuesDetails.SCULPTOR_NAME, cardViewStatuesItems.getCreatorName());
+        //intention de deposer: dans l'identifiant sculptorname de l'objet cardviewstatue la valeur de l'objet obtenue avec getcreatorname
+
+        intent.putExtra(CardViewStatuesDetails.DATE, cardViewStatuesItems.getActualDate());
+        intent.putExtra(CardViewStatuesDetails.STATUE_NAME, cardViewStatuesItems.getTitleName());
+        intent.putExtra(CardViewStatuesDetails.CONTENT_INFORMATION, cardViewStatuesItems.getInformationsContent());
+        intent.putExtra(CardViewStatuesDetails.STATUE_IMAGE, cardViewStatuesItems.getStatueImage());
+
 
 
         startActivity(intent);
