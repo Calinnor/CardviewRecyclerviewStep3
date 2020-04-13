@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<RecyclerAdpterForCardViewStatues.ViewHolderForCardViewStatues>{
 
     private ArrayList<CardViewStatues>mCardViewStatuesList;
-
     //listerner step 3
     //suite a la creation de l'interface mise en place de la var de classe concernée
     private OnCardviewListerner mOnRecyclerAdapterForCardViewStatuesListerner;
@@ -36,7 +35,6 @@ public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<Recyc
         }
     }
 
-
     //listerner step 4
     //constructeur
     //apres la creation de la var de classe du listerner il est necessaire de la rajouter dans le constructeur
@@ -44,7 +42,6 @@ public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<Recyc
          //listerner step 5 on ajoute ici en second parametre du constructeur le champ du listerner
 
         mCardViewStatuesList = cardViewStatuesList;
-
         //listerner step 6
         //on implemente le second champ du constructeur: ce listerner courant est le listerner ciblé
         this.mOnRecyclerAdapterForCardViewStatuesListerner = onRecyclerAdapterForCardViewStatuesListerner;
@@ -88,10 +85,8 @@ public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<Recyc
                 mOnRecyclerAdapterForCardViewStatuesListerner.onCardviewClik(currentItem);
                 //il faut maintenant dire au main, recycler view de main qu'il y a un changement
                 //il faut aussi implementer l'interface puisqu'on la signale au main
-
             }
         });
-
     }
 
     @Override
@@ -103,18 +98,11 @@ public class RecyclerAdpterForCardViewStatues extends RecyclerView.Adapter<Recyc
     // creation d'une interface pour acceder au listerner du recyclerview(a creer de toutes pieces
     //interface publique + nom de l'interface
     public interface OnCardviewListerner {
-
-
         //listerner step 2 on ajoute la fonction de l'interface
         //void nom((nom du type objet a ecouter=classe cardview concernée)+(nom de l'objet))
         void onCardviewClik (CardViewStatues cardViewStatues);
-
         //il est ensuite necessaire de creer le constructeur, donc le parametre de classe sous forme de private final
     }
-
-
-
-
     }
 
 

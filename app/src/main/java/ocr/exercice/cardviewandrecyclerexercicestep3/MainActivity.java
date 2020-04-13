@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -23,27 +21,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
     //on indique qu'on implemente l'interface du listerner de la classe du recycler
     //on implemente l'interface du listerner de la classe du recycler
     //du coup on doit aussi precicser qu'il y a un parametre de plus dans l'adapter
-    TextView SculptorName, Date, ContentInformation ,StatueName;
-    ImageView StatueImage;
     RecyclerView mRecyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        SculptorName = findViewById(R.id.sculptor_name);
-        Date = findViewById(R.id.date);
-        ContentInformation = findViewById(R.id.content_information);
-        StatueName = findViewById(R.id.statue_name);
-        StatueImage = findViewById(R.id.statue_image);
-
         this.configureToolbar();
 
         Date actualDate = new Date();
         DateFormat dateFormat = DateFormat.getDateInstance();
-
 
 //mise en place du contenu de l'arraylist
         ArrayList<CardViewStatues> cardViewStatuesList = new ArrayList<>();
@@ -54,9 +41,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
         cardViewStatuesList.add(new CardViewStatues(dateFormat.format(actualDate),"Temple du Bouddha de Printemps","Ce Bouddha géant est la plus grande statue du monde… avec beaucoup de différence! Avec ses 128 mètres de haut, les autres statues célèbres paraissent minuscules : la Statue de la Liberté ne fait même pas la moitié de sa taille ou le Cristo Redentor qui ne dépasse même pas son pédestral. Et comme vous pouvez l’imaginer ce Bouddha n’est pas un poids plume : 1000 tonnes, pas plus, pas moins ! Pour voir ce géant de cuivre il vous suffit de vous rendre dans la province chinoise du Henan et en plus vous pourrez profiter des magnifiques sources chaudes de la région. Chine. Terminé en 2008","Inconnu",R.drawable.boudha));
         CardViewStatues nc = new CardViewStatues(dateFormat.format(actualDate), "title","other", "bibi", R.drawable.boudha);
         cardViewStatuesList.add(nc);
-
 //arrylist terminée
-
 
  //configuration du recyclerview
         mRecyclerView = findViewById(R.id.recyclerViewId);
@@ -106,21 +91,25 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdpterFor
     //step 11
     //implementation de l'interface du listerner
     public void onCardviewClik(CardViewStatues cardViewStatuesItems) {
-
         Toast.makeText(this, "Il ne faut pas oublier qu'il s'agit d'une nouvelle activity et " +
                 "non d'une simple classe java sinon ca ne marche pas !!! Une matinée de perdue à cause de ça !!!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, CardViewStatuesDetails.class);//attention, c'est une nouvelle activité pas une classe java !!!
-
-        intent.putExtra(CardViewStatuesDetails.SCULPTOR_NAME, cardViewStatuesItems.getCreatorName());
-        //intention de deposer: dans l'identifiant sculptorname de l'objet cardviewstatue la valeur de l'objet obtenue avec getcreatorname
-
-        intent.putExtra(CardViewStatuesDetails.DATE, cardViewStatuesItems.getActualDate());
-        intent.putExtra(CardViewStatuesDetails.STATUE_NAME, cardViewStatuesItems.getTitleName());
-        intent.putExtra(CardViewStatuesDetails.CONTENT_INFORMATION, cardViewStatuesItems.getInformationsContent());
-        intent.putExtra(CardViewStatuesDetails.STATUE_IMAGE, cardViewStatuesItems.getStatueImage());
-
-
-
-        startActivity(intent);
+        /**
+         * utlisation hors parcelable ci dessous
+         */
+//        Intent intent = new Intent(this, CardViewStatuesDetails.class);//attention, c'est une nouvelle activité pas une classe java !!!
+//        intent.putExtra(CardViewStatuesDetails.SCULPTOR_NAME, cardViewStatuesItems.getCreatorName());
+//        //intention de deposer: dans l'identifiant sculptorname de l'objet cardviewstatue la valeur de l'objet obtenue avec getcreatorname
+//        intent.putExtra(CardViewStatuesDetails.DATE, cardViewStatuesItems.getActualDate());
+//        intent.putExtra(CardViewStatuesDetails.STATUE_NAME, cardViewStatuesItems.getTitleName());
+//        intent.putExtra(CardViewStatuesDetails.CONTENT_INFORMATION, cardViewStatuesItems.getInformationsContent());
+//        intent.putExtra(CardViewStatuesDetails.STATUE_IMAGE, cardViewStatuesItems.getStatueImage());
+//            intent.putExtra("CardViewStatue", cardViewStatuesItems);
+//            startActivity(intent);
+        /**
+         * utilisation parcelable
+         */
+        Intent intent = new Intent( this, CardViewStatuesDetails.class);
+        intent.putExtra("CardviewStatue", cardViewStatuesItems);
+        this.startActivity(intent);
     }
 }
